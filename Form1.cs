@@ -84,7 +84,7 @@ namespace CreateIISSite
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
             DownFile df = new DownFile();
             df.userName = "avauser";
@@ -92,6 +92,17 @@ namespace CreateIISSite
             df.domain = "avatech";
             df.uriString = "http://ibas-dev.avatech.com.cn:8866/ibas/modules/";
             df.Analysis();
+            this.textBox1.Text = "";
+            foreach (var item in df.fileList)
+            {
+                this.textBox1.Text += item + System.Environment.NewLine;
+            }
+            df.uriString = "http://ibas-dev.avatech.com.cn:8866/ibas/shell/";
+            df.Analysis();
+            foreach (var item in df.fileList)
+            {
+                this.textBox1.Text += item + System.Environment.NewLine;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)

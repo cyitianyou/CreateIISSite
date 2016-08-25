@@ -17,7 +17,7 @@ namespace CreateIISSite
         public string password;// = this.txtUserpwd.Password.Trim();
         public string domain;//= this.txtDomain.Text.Trim();
         WebClient client;
-        List<string> fileList;
+        public List<string> fileList;
         #endregion
 
         public void Analysis()
@@ -40,9 +40,11 @@ namespace CreateIISSite
             {
                 Regex regex = new Regex("<a\\S*\\Dhref=\\\"(.*)\\\">(.*)</a>", RegexOptions.IgnoreCase);
                 string input = sHtmlText;
-                if (sHtmlText.Contains(str))
+                if (input.Contains("shell") && input.Contains("debug"))
+                    input = input.Remove(0, input.IndexOf("debug"));
+                if (input.Contains(str))
                 {
-                    input = sHtmlText.Remove(0, sHtmlText.IndexOf(str));
+                    input = input.Remove(0, input.IndexOf(str));
                     MatchCollection matchs = new Regex(@"<A\s+[^>]*\s*HREF\s*=\s*([']?)(?<url>\S+)'?[^>]*</A>").Matches(input);
                     foreach (Match match in matchs)
                     {
